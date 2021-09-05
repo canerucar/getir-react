@@ -22,7 +22,7 @@ function Menu({ title, items }) {
       if (!isOpen && windowWidth > 768) {
         setIsOpen(true);
       }
-    }, [windowWidth]);
+    }, [isOpen, windowWidth]);
 
   return (
     <section>

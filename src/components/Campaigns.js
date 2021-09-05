@@ -2,7 +2,6 @@ import React from 'react'
 import Slider from 'react-slick';
 import Banners from 'api/banners.json'
 import {useState, useEffect} from 'react';
-import Title from './ui/Title';
 import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
 import { useWindowWidth } from '@react-hook/window-size';
 
@@ -24,7 +23,7 @@ function PrevButton({ onClick, className }) {
 function Campaigns() {
 
   const [banners, setBanners] = useState([]);
-  const windowWidth = useWindowWidth();
+  const width = useWindowWidth();
 
   useEffect(() => {
     setBanners(Banners);
@@ -68,25 +67,24 @@ function Campaigns() {
   };
 
   return (
-    <div className="container mx-auto md:pt-8">
-      <div className="hidden md:block">
-        <Title>Kampanyalar</Title>
+    <>
+      <div
+        className="sm:container overflow-hidden md:overflow-visible mx-auto px-0"
+        style={{ width: width < 640 ? width : '' }}
+      >
+        <h3 className="font-semibold hidden sm:block text-sm mb-3">
+          Kampanyalar
+        </h3>
+        <Slider className="-mx-2 relative" {...settings}>
+          {banners &&
+            banners.map((banner) => (
+              <div key={banner.id} className="px-2">
+                <img src={banner.image} className="w-full sm:rounded-lg" alt="banner images" />
+              </div>
+            ))}
+        </Slider>
       </div>
-      <Slider className="md:-mx-2" {...settings}>
-        {banners.length &&
-          banners.map((banner, index) => (
-            <div key={banner.id}>
-              <picture className="block md:px-2">
-                <img
-                  src={banner.image}
-                  alt="banners img"
-                  className="md:rounded-lg"
-                />
-              </picture>
-            </div>
-          ))}
-      </Slider>
-    </div>
+    </>
   );
 }
 

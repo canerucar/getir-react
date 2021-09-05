@@ -16,7 +16,6 @@ function App() {
       {windowWidth <= 768 && <Campaigns />}
       <HeroSection />
       <Categories />
-      <Campaigns />
       {windowWidth > 768 && <Campaigns />}
       <div className="container mx-auto grid gap-y-6 pt-8">
         <Favorites />
